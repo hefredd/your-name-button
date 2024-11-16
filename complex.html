@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/style/complex.css">
+</head>
+<body>
+  <input placeholder="name" class="js-name"
+    onkeydown="
+      if(event.key === 'Enter'){
+        giveName();
+      }">
+  <button onclick="
+  giveName();
+  
+  ">submit</button>
+  <p class="js-message"></p>
+
+  <script>
+    function displaySavedMessage() {
+      const savedMessage = localStorage.getItem('userMessage');
+      if (savedMessage) {
+        document.querySelector('.js-message').textContent = savedMessage;
+      }
+    }
+    function giveName(){
+      const valueName = document.querySelector('.js-name').value;
+      const theResult = document.querySelector('.js-message');
+
+      let theResult2 ='';
+      if(valueName.trim() === '' ){
+        theResult2 = 'Input your name';
+
+      }else{
+        theResult2 = 'Your name is '+ valueName.toUpperCase();
+      }
+      theResult.textContent = theResult2;
+      localStorage.setItem('userMessage', theResult2);
+
+    }
+    window.onload = displaySavedMessage;
+  </script>
+</body>
+</html>
